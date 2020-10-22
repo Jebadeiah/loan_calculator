@@ -1,22 +1,6 @@
 type: edu
 custom_name: stage3
 files:
-- name: creditcalc/creditcalc.py
-  visible: true
-  text: |
-    loan_principal = 'Loan principal: 1000'
-    final_output = 'The loan has been repaid!'
-    first_month = 'Month 1: repaid 250'
-    second_month = 'Month 2: repaid 250'
-    third_month = 'Month 3: repaid 500'
-
-    # write your code here
-    print(loan_principal)
-    print(first_month)
-    print(second_month)
-    print(third_month)
-    print(final_output)
-  learner_created: false
 - name: tests.py
   visible: false
   text: |
@@ -121,17 +105,26 @@ files:
     if __name__ == '__main__':
         LoanCalcTest('creditcalc.creditcalc').run_tests()
   learner_created: false
+- name: creditcalc/creditcalc.py
+  visible: true
+  text: |
+    loan_principal = 'Loan principal: 1000'
+    final_output = 'The loan has been repaid!'
+    first_month = 'Month 1: repaid 250'
+    second_month = 'Month 2: repaid 250'
+    third_month = 'Month 3: repaid 500'
+
+    # write your code here
+    print(loan_principal)
+    print(first_month)
+    print(second_month)
+    print(third_month)
+    print(final_output)
+  learner_created: false
 feedback_link: https://hyperskill.org/projects/90/stages/502/implement
-status: Failed
+status: Solved
 feedback:
-  message: "Wrong answer in test #1\n\nCorrect annuity payment is 21248 but you output\
-    \ numbers: 991666\n\nPlease find below the output of your program during this\
-    \ failed test.\nNote that the '>' character indicates the beginning of the input\
-    \ line.\n\n---\n\nWhat would you like to calculate?\n\n                  type\
-    \ 'n' for number of monthly payments,\n\n                  type 'a' for the annuity\
-    \ monthly payment amount,\n \n                  type 'p' for the principal: \n\
-    > a\nPlease enter your loan principal:\n> 1000000\nPlease enter the number of\
-    \ payments:\n> 60\nPlease enter your interest rate:\n> 10\nYour monthly bill is\
-    \ -991666"
-  time: Wed, 21 Oct 2020 09:23:32 UTC
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/90/stages/502/implement">JetBrains
+    Academy</a>
+  time: Thu, 22 Oct 2020 05:46:01 UTC
 record: -1

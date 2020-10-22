@@ -10,28 +10,39 @@ import math
 
 def number_of_payments(payment, loan_principal, interest):
     interest = interest / 12 / 100
-    ret_val = math.log(1 + interest, payment / (payment - interest * loan_principal))
+    ret_val = math.log((payment / (payment - interest * loan_principal)), 1 + interest)
     return math.ceil(ret_val)
 
 
 # def monthly_payment(loan_principal, payments, interest):
 #     interest = interest / 12 / 100
-#     ret_value = (loan_principal * ((interest * ((1 + interest) ** payments))
+#     return (loan_principal * ((interest * ((1 + interest) ** payments))
 #                                    / ((1 + interest) ** payments) - 1))
-#     return ret_value
 
 
 def monthly_payment(loan_principal, payments, interest):
     interest = interest / 12 / 100
-    ret_value = (loan_principal * ((interest * math.pow(1 + interest, payments))
-                                   / (math.pow(1 + interest, payments) - 1)))
-    return ret_value
+    return (loan_principal * ((interest * math.pow(1 + interest, payments))
+                              / (math.pow(1 + interest, payments) - 1)))
 
+
+# def principal_of_loan(payments, payment, interest):
+#     interest = interest / 12 / 100
+#     return (payment / ((interest * (1 + interest) ** payments)
+#                        / ((1 + interest) ** payments) - 1))
+
+
+# def principal_of_loan(payments, payment, interest):
+#     interest = interest / 12 / 100
+#     ret_val = payment / ((interest * math.pow(1 + interest, payments))
+#                           / (math.pow(1 + interest, payments)) - 1)
+#     return math.floor(ret_val)
 
 def principal_of_loan(payments, payment, interest):
     interest = interest / 12 / 100
-    return (payment / ((interest * (1 + interest) ** payments)
-                       / ((1 + interest) ** payments) - 1))
+    ret_val = payment / ((interest * math.pow(1 + interest, payments))
+                         / (math.pow(1 + interest, payments) - 1))
+    return math.floor(ret_val)
 
 
 choice: str = input("""What would you like to calculate?\n
@@ -44,14 +55,15 @@ if choice.lower() == 'n':
     payment_amount = float(input("Please enter your monthly payment amount:\n"))
     interest_rate = float(input("Please enter your interest rate:\n"))
     ret = number_of_payments(payment_amount, principal, interest_rate)
-    if ret > 0:
-        raise ValueError("Check your inputs, as the result came out negative.")
-    elif ret == 0:
-        print("There are no payments to make on this loan.")
-    elif ret == 1:
-        print("You've only got 1 payment on this loan!")
+    year, month = divmod(ret, 12)
+    if ret <= 12.0:
+        if ret == 1:
+            print("It will take 1 month to repay this loan")
+        else:
+            print("It will take {} months to repay this loan".format(int(math.ceil(ret))))
     else:
-        print("The number of payments on your loan is {}".format(int(ret)))
+        print("It will take {} years and {} months to repay this loan".format(
+            int(math.ceil(year)), int(math.ceil(month))))
 
 if choice.lower() == 'a':
     principal = float(input("Please enter your loan principal:\n"))
@@ -61,16 +73,16 @@ if choice.lower() == 'a':
 #    if ret > 0:
 #        raise ValueError("Check your inputs, as the result came out negative.")
 #    else:
-    print("Your monthly bill is {}".format(int(ret)))
+    print("Your monthly bill is {}".format(int(math.ceil(ret))))
 
 if choice.lower() == 'p':
-    num_payments = float(input("Please enter the number of payments:\n"))
     payment_amount = float(input("Please enter your monthly payment amount:\n"))
+    num_payments = float(input("Please enter the number of payments:\n"))
     interest_rate = float(input("Please enter your interest rate:\n"))
     ret = principal_of_loan(num_payments, payment_amount, interest_rate)
-    if ret > 0:
-        raise ValueError("Check your inputs, as the result came out negative.")
-    elif ret == 0:
-        print("You're paid off!")
-    else:
-        print("The principal of your loan is {}".format(int(ret)))
+#    if ret > 0:
+#        raise ValueError("Check your inputs, as the result came out negative.")
+#    elif ret == 0:
+#        print("You're paid off!")
+#    else:
+    print("The principal of your loan is {}".format(ret))
